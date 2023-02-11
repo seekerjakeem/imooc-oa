@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <settings>
+    <!-- goods_id ==> goodsId 驼峰命名转换 -->
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+  <!--启用Pagehelper分页插件-->
+<!--  <plugins>-->
+<!--    <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+<!--      &lt;!&ndash;设置数据库类型&ndash;&gt;-->
+<!--      <property name="helperDialect" value="mysql"/>-->
+<!--      &lt;!&ndash;分页合理化&ndash;&gt;-->
+<!--      <property name="reasonable" value="true"/>-->
+<!--    </plugin>-->
+<!--  </plugins>-->
+
+  <!--设置默认指向的数据库-->
+  <environments default="dev">
+    <!--配置环境，不同的环境不同的id名字-->
+    <environment id="dev">
+      <!-- 采用JDBC方式对数据库事务进行commit/rollback -->
+      <transactionManager type="JDBC"></transactionManager>
+      <!--采用连接池方式管理数据库连接-->
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/imooc_oa?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+      </dataSource>
+
+    </environment>
+  </environments>
+
+  <mappers>
+    <mapper resource="mappers/test.xml"/>
+  </mappers>
+</configuration>
