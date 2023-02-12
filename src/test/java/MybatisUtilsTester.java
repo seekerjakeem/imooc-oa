@@ -9,9 +9,11 @@ public class MybatisUtilsTester {
       System.out.println(out);
       return out;
     });
+  }
 
-
-
-
+  @Test
+  public void testCase2() {
+    String out = (String) MybatisUtils.executeQuery(session -> session.selectOne("test.sample"));
+    System.out.println(out);
   }
 }

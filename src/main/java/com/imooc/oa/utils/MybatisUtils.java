@@ -40,6 +40,11 @@ public class MybatisUtils {
     }
   }
 
+  /**
+   * 执行query
+   * @param func
+   * @return
+   */
   public static Object executeQuery(Function<SqlSession, Object> func) {
     SqlSession session = sqlSessionFactory.openSession();
     try {
@@ -48,7 +53,22 @@ public class MybatisUtils {
     } finally {
       session.close();
     }
+  }
 
+  public static Object executeUpdate(Function<SqlSession, Object> func) {
+    // 手动提交回滚事务
+    SqlSession session = sqlSessionFactory.openSession(false);
+    try {
+      Object obj = func.apply(session);
+      session.commit();
+      return obj;
+    } catch (Exception e){
+      e.printStackTrace();
+      session.rollback();
+      throw e;
+    } finally {
+      session.close();
+    }
   }
 }
 
